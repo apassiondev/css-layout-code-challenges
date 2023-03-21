@@ -4,12 +4,27 @@
   width: clamp(calc(320px - 3rem), 75%, 70ch);
   border: 0.5rem solid black;
   display: flex;
-  flex-wrap: wrap;
   gap: 1rem;
+
+  flex-wrap: wrap;
+  /*
+    Wrap content if total elements' width is larger than the container's width
+  */
 }
 
 .block {
-  
+  flex: 1 0 10ch;
+  /*
+    Syntax:
+    flex: <grow-value> <shrink-value> <basis-width>
+
+    <grow-value> / <shrink-value>
+      1: allowed
+      0: not allowed
+  */
+
+
+
   padding: 0 1rem;
   border: 0.5rem solid green;
 }
