@@ -12,13 +12,27 @@ img {
 }
 
 .wrapper {
-
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .image img {
-
+  height: 100vh;
+  /* 100% of the viewport height */
+  object-fit: cover;
+  /*
+    This takes available space and then stretch the image either vertically or horizontally
+    to match the height, and let the other height or width be proportionate to the overall
+    layout of the image.
+    It means no matter what size the image container is, the image will always be cropped to fit
+    inside that container.
+  */
 }
 
 .cover {
   padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
