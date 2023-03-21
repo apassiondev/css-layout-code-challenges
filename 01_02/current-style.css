@@ -15,9 +15,24 @@
   margin: 0;
   padding: 0;
   display: flex;
-  flex-wrap: wrap;
-  gap: 1em;
   justify-content: flex-end;
+
+  flex-wrap: wrap;
+  /*
+    The property makes content items naturally wrap down underneath the menu whenever there is not what
+    there is not enough horizontal space.
+
+    It ends up with wrapping items down on a second line or a third line or a fourth line,
+    depending on how much space is available. In short, when the viewport width is reduced,
+    the items wrap down to the next line.
+  */
+
+  gap: 1em;
+  /*
+    Giving just one value because there's a change the menu might wrap.
+    And in that case, I also want a 1rem space between the first line and the second line.
+    Otherwise, we could have provided two values, one for the horizontal gap, and one for the vertical gap.
+  */
 }
 
 .menu li {

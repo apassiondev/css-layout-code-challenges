@@ -17,6 +17,7 @@
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 1rem;
   grid-auto-flow: dense;
+  /* This fills in any of the gaps that may happen due to grid-row span or grid-column span. */
 }
 
 .grid li {
@@ -29,6 +30,9 @@
 li.featured {
   border-color: purple;
   /* grid-row: span 2; */
+  /* Acquire 2 rows for the current grid item. */
   grid-column: span 2;
-  ;
+  /* Acquire 2 columns for the current grid item.  */
+
+
 }
