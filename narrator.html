@@ -30,110 +30,95 @@
 
 <body>
   <div class="main readable" id="narrator">
-    (retro video game style music) - Full bleed sections, meaning the section takes up the full available width of the
-    viewport can be used to provide visual separation between sections of an article, to highlight a specific section
-    within
-    an article, or to display large visuals like images or videos. In this challenge, you'll create two different full
-    bleed
-    sections, one for text, as you see here, and one for an image. The full bleed text section has a background color
+    - [Instructor] Card based layouts are popular for an obvious reason. Presenting information on cards makes it easy
+    for
+    the visitor to understand each card holds a separate piece of information. In the first of several card based
+    challenges, you'll make a basic responsive card. The card features an image, a heading, a paragraph and a button.
+    The
+    image must appear at the top of the card edge to edge. The text and button should have consistent whitespace, top,
+    right, bottom and left. The card must have a visible border or other design feature demarking its outer edges. The
+    card
+    must have a defined maximum width and be centered horizontally and vertically. And to test, change the viewport
+    width to
+    ensure the contents of the card are always displayed within the card at all possible widths. Looking in the browser
+    here, I want to show you one specific feature with this card. As I reduce or increase the content width, you'll
+    notice
+    when we have a very wide viewport, the card doesn't change size. Then as I reduce the width of the viewport to a
+    certain
+    point, it starts reducing in size, but only to a specific point, at which place it stops reducing in size until we
+    get
+    even further down where the content is being squished. That's what I want you to achieve here. In the exercise
+    files,
+    you'll find the various pieces that make up the card in the HTML. There's also some basic styling, including empty
+    rules
+    for the relevant selectors. This is your starting point. Now you take on this challenge. Pause the video here, find
+    your
+    solution, then come back, hit play and see how I solve the same challenge. Out of the box, in the exercise files,
+    there
+    is no card at all. So the first thing we need to do is define the outer borders of the card. In the style sheet,
+    there's
+    this class here called card. And if we go look at the markup, you'll find here there's a figure with a class card
     and
-    the text is central line to line up with the rest of the text on the page. The full bleed image takes up the full
-    available width as long as the image is wide enough. If the view port is wider than the image itself then the image
-    should be central line. And finally to test, change the view port width to ensure the full bleed sections behave as
-    expected, both in very narrow and very wide view ports. In the exercise files, you'll find a series of paragraphs
-    and an
-    image inside a figure. You'll also notice there's one section, a div with the full width class applied and a figure
-    with
-    a full width class applied. This full width class is what will create the full width view. I've also supplied some
-    basic
-    styling just to get you started, but if you go check in the browser you'll see right now is just a central line
-    layout
-    with no full width content of any kind. This is your starting point. Now is your turn to take on this challenge.
-    Pause
-    the video here, find your solution. Then come back, hit play and see how I solve the same challenge. (retro video
-    game
-    style music) When you see full width content your immediate thought is probably to somehow use 100 VW to make this
-    content full width. Resist that urge. 100 VW doesn't behave nicely in all browsers and can cause unintended
-    horizontal
-    scrolling in some cases. A better solution is to use grid. Yes, I said grid. Let me show you what I mean. If you
-    look at
-    this layout right now and you were to draw this layout in a design application you would draw a grid. You would have
-    a
-    line here on the left hand side and a line here on the right hand side, and you would make three columns. An empty
-    call
-    is flexible on the left. Then a mid column with all the content that has some sort of definition of how wide it can
-    be.
-    And then an empty column on the right, that's also flexible. So let's build that exact grid in CSS. In my document,
-    I
-    can see that the main here is what contains all the elements, so I'll use the main class to start. So I'll take away
-    all
-    the styling so that it's no longer central line and I'll say display grid. Then I need to figure out how to lay out
-    the
-    grid, so here I'll set up three columns. The first column will be 1fr. The second column will be the content width,
-    so I
-    want it to be either the available width or a max width, so I'll use minmax for this column, minmax. And then I'll
-    say
-    it should either be auto, so whatever's the available width, or it'll be the content width, And I can see here, I
-    already have a custom property for the content width so I'll just use that. So I'll say auto or var content width.
-    And
-    then finally the last column should be 1fr. That way we have a flexible column, a controlled width column for the
-    content, and then a flexible column on the right hand side. Save that, go back in the browser, and this does not
-    look
-    what I want at all. I mean, we have three columns, but the content is being placed in those three columns. So what I
-    need to do now is grab all the content within the grid and place it in the same column. I can do that down here. We
-    already have a rule for main and then the first child or the first level children, so I'll just say for those items
-    grid
-    column two. So I'll place all direct descendants of the main in column number two. That brings us back to the
-    original
-    layout, which isn't what we want, so I need to do something else to make this work. So let's see, I have this class
-    down
-    here, it's called full width. So if I wanted to use full width to get the content to span across the entire grid, I
-    would say grid column, and then from one to minus one, right. So let's do that and see what happens. Okay, so now
-    the
-    content is spanning the full width but the text content is also spanning the full width. And down here, the image
-    has
-    some padding on the left and right hand side. Okay, so what if I take the padding away, so I'll say padding and then
-    2rem at the top but zero on the left and right hand side and save that. Okay, that made the text bunch all the way
-    out
-    but it did solve the problem for the image. Okay, so what do I do with this piece here? Well, I could just keep
-    passing
-    the grid down and say for the things that have full width, let's make another rule. So say full width and then the
-    children of any class anything that has a class full width. So that is still the first descendant, remember. So
-    here,
-    we're saying the full width, this one and then any children should be aligned to the grid, so let's see. So if we
-    say
-    full width here then I can say grid column two. And that should be the same, right. I'll save that. Go back in the
-    browser. That changed nothing. Why is that? Oh, it's because we're now inside a container and there's no grid here,
-    so I
-    need to copy the grid down. So what I can do here is say for the full width I want to use the same grid as the
-    parent.
-    So I'll say display grid, and then watch grid, template, columns inherit. So now I'm inheriting the grid into the
-    full
-    width, so that means I'm technically operating with two grids. I have the global grid and then I have a copy of the
-    global grid inside this full width thing here. Now the image is, the text is aligned but it's not aligned properly,
-    so I
-    need to change that as well, I guess. So I'll go in here and say, so let's see full width here. And then the padding
-    should be, let's see, full width and then say padding zero at the top, and then 2rem, text is aligned, okay. And the
-    image is no longer full width right. So I also need to somehow deal with the image. So what I can do then is say, if
-    we
-    look at the markup, the image is sitting inside this figure and the figure is what's being set to full width. So if
-    I
-    look at this, let's see here, we have the figure, see the figure is full width. And then the image is in set, so I
+    the figure wraps around everything. So in this particular markup, the figure is the card itself. So that's where we
     can
-    do the same thing for the image as well. So if I say here, figure, and then the figure that has the class full
-    width,
-    just so that in case that we had other images that didn't have that, and then for that figure and the child, so that
-    would be the image, say padding zero and grid column 1/ -1. So we're already inheriting the same grid up here,
-    right.
-    The full width grid. So I'm just setting the width of the image inside to 1/-1. So the full width and then the
-    padding
-    to zero, save that. Look at that. Image is now full width, text is now full width, and we have a complete solution.
-    So
-    yeah, 100 VW could probably solve your problem but it would introduce some unexpected behavior in some browsers.
-    Whereas
-    grid will give you complete control over exactly what's going on. And because we can inherit grid lines into other
-    grids
-    we can now get consistent layouts across the entire page.
+    start. Since we have a card, we need to demark the outer borders of the card. So I'll start by setting up a border.
+    I'll
+    set it to, let's see, 0.5rem and then solid and black, just so that we have a nice thick border. I also want to add
+    some
+    margin around the card so that it's not going edge to edge. So I'll say margin 2rem. This won't impact the card when
+    it's a card in the middle of a large space, but it will impact the card when the card is in a very small space so
+    that
+    it never butts up against the sides. So let's just save this right now and go back and check. Okay, so we have a
+    card,
+    but it's way too big and it's not looking very nice. All right. So we need to do something else. What we can do here
+    is
+    limit the width of the card and I'll do that using the width property. And you notice I'm not using max width here
+    because I want to use the clamp function. And the clamp function allows me to define the smallest size of the card,
+    the
+    desired size of the card, and the maximum size of the card. So here, I'll say for width, I'll say clamp, and then
+    I'll
+    say the smallest will be 20ch. The desired variable width will be 50% of the available space. And then for the
+    widest
+    width, I want to set the content width. So we've used the content width custom property before. It's the same thing.
+    Only in this case, it's slightly smaller. So I'll say var and then content width. And that way, what we'll get is a
+    layout where the card will try to be 50% of the width, except in cases where it would be smaller than 20ch, in which
+    case it's 20ch. Or in cases where it can be, or in cases where 50% is bigger than the content width defined, in
+    which
+    case it'll just be the content width. All right, back in the browser, we now have a card. And if we open the
+    inspector
+    here and go to the mobile view, you see here I toggled the mobile so that I can use these toggles. If I resize the
+    window, see it doesn't change size here. And then it slowly grows smaller and then eventually it'll grow smaller
+    again.
+    So now I'm getting the behavior I want, but the card isn't centered, so I need to fix that as well. For this
+    particular
+    instance, I can just do that in the main using the centered, using the center feature we talked about earlier in the
+    course. I'll say display flex and justify content center. That will just center my card. Okay. Now we need to deal
+    with
+    the content inside. So let's look at the markup here. We have an image and then we have a fig caption. So that means
+    I
+    should be able to take the fig caption and then indent just the fig caption content. Right? So I'll grab just what's
+    inside here and indent it. So I'll go down here, card fig caption. Okay. And then say margin zero and 2rem and 2rem.
+    That will give us a nice margin, I think. Look at that, nicely aligned. And then I want this button here on the
+    bottom
+    to be over here on the right hand side. Now to do that, I could either do a text align, but I'm actually going to
+    use
+    flex for this. So here, I'll say for the card fig caption, I want to display it as flex. Then I want the flex
+    direction
+    to be column. And then for the, let's see, card button down here at the bottom, I'll say align self to flex end.
+    Let's
+    see what that looks like. Uh-huh, see. Now the button is over here. Now, the last thing I need to do is deal with
+    this
+    extra space that's here. So if I go look at the code, let's see, I'll dock this so you can see what's going on. So
+    if I
+    go look at the markup here, you'll see that h2 has a margin on the bottom. And then the paragraph has a margin at
+    the
+    top, but because this is now a flex box, those two margins aren't collapsing. So I need to remove one of those
+    margins.
+    I can choose to remove either. So in this example, I'll just remove the margin for card h2. So I'll say margin,
+    woops,
+    margin block end to zero. And now we don't have that giant wide space. That's it. That's the solution to the
+    challenge.
+    We now have a fully responsive card.
   </div>
 
   <script type="text/javascript">
