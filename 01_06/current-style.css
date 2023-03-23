@@ -46,44 +46,45 @@ body > * {
 
 @media screen and (min-width: 100ch) {
   body {
-
+    display: grid;
+    grid-template-columns: 1fr minmax(15ch, 30%);
+    grid-template-rows: auto auto 1fr auto;
   }
 
   .header {
-    
+    /* start at the beginning of the grid, end at the end of the grid. (horizontally) */
+    grid-column: 1/-1;
   }
 
   .navbar {
-    
-  }
-  
-  .main {
-
+    /* start at the beginning of the grid, end at the end of the grid. (horizontally) */
+    grid-column: 1/-1;
   }
 
-  .sidebar {
+  .main {}
 
-  }
+  .sidebar {}
 
   .footer {
-
+    /* start at the beginning of the grid, end at the end of the grid. (horizontally) */
+    grid-column: 1/-1;
   }
 }
 
 @media screen and (min-width: 140ch) {
   body {
-
+    /*
+      One column that's limited in width, then one that takes up available space, and then
+      another one that's limited in width.
+    */
+    grid-template-columns: minmax(15ch, 20%) 1fr minmax(15ch, 20%);
   }
 
   .navbar {
-    
+    grid-column: span 1;
   }
 
-  .navbar ul {
-    
-  }
+  .navbar ul {}
 
-  .main {
-
-  }
+  .main {}
 }

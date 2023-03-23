@@ -59,14 +59,10 @@ body > * {
     grid-column: 1/-1;
   }
 
-  
-  .main {
 
-  }
+  .main {}
 
-  .sidebar {
-
-  }
+  .sidebar {}
 
   .footer {
     grid-column: 1/-1;
@@ -86,7 +82,5 @@ body > * {
     flex-direction: column;
   }
 
-  .main {
-
-  }
+  .main {}
 }
