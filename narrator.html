@@ -30,96 +30,110 @@
 
 <body>
   <div class="main readable" id="narrator">
-    - [Narrator] Pull quotes, where the quote or piece of text is pulled out of the main text block to the left or
-    right,
-    adds visual, interest of content, and focus to the pulled quote. In this challenge, you'll create dynamic responsive
-    pull quotes that floats left and right when possible, and are pulled out of the main content area when there a
-    sufficient horizontal space. And there's a small caveat to this challenge. Watch what happens when I reduce the
-    width of
-    this view here. So right now, the pull quotes are being pulled out of the main content, but when I hit the content
-    width, the pull quotes, left and right margins, lock with the content width, so they're not being indented in any
-    way,
-    shape, or form right now, they're only being pulled out when there's enough space. The pull quotes should align with
+    (retro video game style music) - Full bleed sections, meaning the section takes up the full available width of the
+    viewport can be used to provide visual separation between sections of an article, to highlight a specific section
+    within
+    an article, or to display large visuals like images or videos. In this challenge, you'll create two different full
+    bleed
+    sections, one for text, as you see here, and one for an image. The full bleed text section has a background color
+    and
+    the text is central line to line up with the rest of the text on the page. The full bleed image takes up the full
+    available width as long as the image is wide enough. If the view port is wider than the image itself then the image
+    should be central line. And finally to test, change the view port width to ensure the full bleed sections behave as
+    expected, both in very narrow and very wide view ports. In the exercise files, you'll find a series of paragraphs
+    and an
+    image inside a figure. You'll also notice there's one section, a div with the full width class applied and a figure
+    with
+    a full width class applied. This full width class is what will create the full width view. I've also supplied some
+    basic
+    styling just to get you started, but if you go check in the browser you'll see right now is just a central line
+    layout
+    with no full width content of any kind. This is your starting point. Now is your turn to take on this challenge.
+    Pause
+    the video here, find your solution. Then come back, hit play and see how I solve the same challenge. (retro video
+    game
+    style music) When you see full width content your immediate thought is probably to somehow use 100 VW to make this
+    content full width. Resist that urge. 100 VW doesn't behave nicely in all browsers and can cause unintended
+    horizontal
+    scrolling in some cases. A better solution is to use grid. Yes, I said grid. Let me show you what I mean. If you
+    look at
+    this layout right now and you were to draw this layout in a design application you would draw a grid. You would have
+    a
+    line here on the left hand side and a line here on the right hand side, and you would make three columns. An empty
+    call
+    is flexible on the left. Then a mid column with all the content that has some sort of definition of how wide it can
+    be.
+    And then an empty column on the right, that's also flexible. So let's build that exact grid in CSS. In my document,
+    I
+    can see that the main here is what contains all the elements, so I'll use the main class to start. So I'll take away
+    all
+    the styling so that it's no longer central line and I'll say display grid. Then I need to figure out how to lay out
     the
-    overall content when the viewport is narrow, and be pulled out to the sides when the viewport is wide. To test this,
-    change the viewport width, and ensure the pull quotes are being pulled to the side when they're supposed to, and are
-    lining up with the main content when the screen is narrow. In the exercise files for this challenge, you'll find a
-    series of paragraphs mixed with pull quotes. There's also some basic styling to floats the quotes left and right and
-    ensure they are visually different from the paragraphs. And yes, even though we have flex and grid, floats is still
-    very
-    much a tool we can and should in modern web layouts. And you see, I'm using float here for pull start and pull end
-    to
-    align the content right now. This is your starting point. Now, you take on this challenge, pause the video here,
-    find
-    your solution, then come back, hit play, and see how I solve the same challenge. (bouncy upbeat music) The solution
-    to
-    this challenge requires using some old techniques mixed with some new CSS features. As we start the challenge, the
-    layout already has quotes that are indented to the left and right, but as you can see, they're not being pulled out.
+    grid, so here I'll set up three columns. The first column will be 1fr. The second column will be the content width,
+    so I
+    want it to be either the available width or a max width, so I'll use minmax for this column, minmax. And then I'll
+    say
+    it should either be auto, so whatever's the available width, or it'll be the content width, And I can see here, I
+    already have a custom property for the content width so I'll just use that. So I'll say auto or var content width.
+    And
+    then finally the last column should be 1fr. That way we have a flexible column, a controlled width column for the
+    content, and then a flexible column on the right hand side. Save that, go back in the browser, and this does not
+    look
+    what I want at all. I mean, we have three columns, but the content is being placed in those three columns. So what I
+    need to do now is grab all the content within the grid and place it in the same column. I can do that down here. We
+    already have a rule for main and then the first child or the first level children, so I'll just say for those items
+    grid
+    column two. So I'll place all direct descendants of the main in column number two. That brings us back to the
+    original
+    layout, which isn't what we want, so I need to do something else to make this work. So let's see, I have this class
+    down
+    here, it's called full width. So if I wanted to use full width to get the content to span across the entire grid, I
+    would say grid column, and then from one to minus one, right. So let's do that and see what happens. Okay, so now
+    the
+    content is spanning the full width but the text content is also spanning the full width. And down here, the image
+    has
+    some padding on the left and right hand side. Okay, so what if I take the padding away, so I'll say padding and then
+    2rem at the top but zero on the left and right hand side and save that. Okay, that made the text bunch all the way
+    out
+    but it did solve the problem for the image. Okay, so what do I do with this piece here? Well, I could just keep
+    passing
+    the grid down and say for the things that have full width, let's make another rule. So say full width and then the
+    children of any class anything that has a class full width. So that is still the first descendant, remember. So
+    here,
+    we're saying the full width, this one and then any children should be aligned to the grid, so let's see. So if we
+    say
+    full width here then I can say grid column two. And that should be the same, right. I'll save that. Go back in the
+    browser. That changed nothing. Why is that? Oh, it's because we're now inside a container and there's no grid here,
+    so I
+    need to copy the grid down. So what I can do here is say for the full width I want to use the same grid as the
+    parent.
+    So I'll say display grid, and then watch grid, template, columns inherit. So now I'm inheriting the grid into the
+    full
+    width, so that means I'm technically operating with two grids. I have the global grid and then I have a copy of the
+    global grid inside this full width thing here. Now the image is, the text is aligned but it's not aligned properly,
+    so I
+    need to change that as well, I guess. So I'll go in here and say, so let's see full width here. And then the padding
+    should be, let's see, full width and then say padding zero at the top, and then 2rem, text is aligned, okay. And the
+    image is no longer full width right. So I also need to somehow deal with the image. So what I can do then is say, if
+    we
+    look at the markup, the image is sitting inside this figure and the figure is what's being set to full width. So if
+    I
+    look at this, let's see here, we have the figure, see the figure is full width. And then the image is in set, so I
+    can
+    do the same thing for the image as well. So if I say here, figure, and then the figure that has the class full
+    width,
+    just so that in case that we had other images that didn't have that, and then for that figure and the child, so that
+    would be the image, say padding zero and grid column 1/ -1. So we're already inheriting the same grid up here,
+    right.
+    The full width grid. So I'm just setting the width of the image inside to 1/-1. So the full width and then the
+    padding
+    to zero, save that. Look at that. Image is now full width, text is now full width, and we have a complete solution.
     So
-    the challenge here focuses on that pulling out feature. You'll also notice that right now, when we're just floating
-    the
-    content without any custom margins, the content is lining up nicely with the overall content width. So the effect
-    that
-    we want for smaller screens is already present, what we need to figure out is how to preserve that effect when we
-    have
-    wider screens. Now, when you work with pull quotes, you have to first figure out how much you want to pull them out
-    of
-    the main content. And here I have a very basic approach to it. I look at the overall width, so the full width of the
-    viewport, then I say, okay, if we take only the available space on left and right, and then divide each of those
-    spaces
-    in half, then we can pull the quote out to one quarter of the available space. And that's the first clue. We need to
-    figure out what that value is, the quarter of the available space. If you scroll to the top of the style sheet,
-    you'll
-    see I've defined the content width using a custom property here, and that I'm using it down here for max width. That
-    content width is 50ch. Now, I want to figure out how much I should indent or pull out these pull quotes, and I'll do
-    that in a custom property as well. I'll call that custom property inset. Here, I'll use the calc function to
-    calculate
-    the width. And what I want to do is say give me 100% of the viewport width, and then subtract the content that gives
-    me
-    only the available space, and then divide that available space by 4, so I get one quarter of it, which is how much I
-    want to indent each of these pull quotes. So first, give me 100vw, that's the full viewport width, minus var
-    content-width, there we go, so var content-width / 4. So this will give me 100% of the available space, minus the
-    content width, and then divide that by 4. So that's the space that we're looking for, one quarter of the available
-    space. Then, I need to indent the content. So down here, we have pull start. That's the pull quote that is on the
-    start
-    side. So if I add a margin on the left hand side here, we should get an indentation. So I'll say margin-inline-start
-    and
-    set inset, like that, save that, go back in the browser, and the pull quote is being pulled in the wrong direction.
-    That's because the value that's being generated up here is a positive value, but how do I make it negative? I can't
-    put
-    it like minus in front of a var, that won't work. No, instead I'll change this value up here to say -1 times and
-    then
-    the value. So that just inverts the value to a negative value. Save that, go back, and look at that. We have the
-    left
-    indentation. Now, the cool is, since I have this as a custom property, I can do the exact same thing down here for
-    pull
-    end. So I'll say margin-inline-end, and here again, I want inset, save that. And now, we get a negative margin on
-    the
-    right hand side, and the pull quote is pulling out to the right. So we have a solution, right? Ah, not quite, 'cause
-    watch what happens when I reduce the width here. So everything is fine as long as it's wide, but when we hit the
-    width
-    of the content, my pull quotes start pulling inwards, which is not what I want. You'll remember in the demo, the
-    content
-    lines up with the overall content width when we get at the smaller screen. Now, your compulsion is probably to say,
-    "Okay, I'll fix this using a media query," and you totally can, but you don't have to, instead you can use the min
-    function. So watch this. If I go into margin-inline-start here for pull start, and I say min and then var inset,
-    0px,
-    save that, go back in my browser, and watch, you see how the content is lining up properly here. And then when I
-    pull,
-    it starts pulling out. What? So here's what's happening. This min function picks the smallest or most negative value
-    from a list of comma separated values. So in this configuration, if the inset value is a negative number, and
-    therefore
-    smaller than 0, then that value is used. If on the other hand, inset is either 0 or a positive number, then 0 is
-    used
-    instead. So that means, as long as the inset value is a negative number, we get this pullout, but once we hit 0, so
-    the
-    margin is 0, then it just stays at 0. That solves the problem for us without a media query. So now, I can do the
-    same
-    down here. In fact, I can just copy this as it is, and paste it in, save. And now, we have that effect on both of
-    our
-    pull quotes. So like I said, using some old techniques, negative margins, and some new features, custom properties,
-    and
-    the min function, we get a solution that works everywhere without media queries.
+    yeah, 100 VW could probably solve your problem but it would introduce some unexpected behavior in some browsers.
+    Whereas
+    grid will give you complete control over exactly what's going on. And because we can inherit grid lines into other
+    grids
+    we can now get consistent layouts across the entire page.
   </div>
 
   <script type="text/javascript">
