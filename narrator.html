@@ -1,144 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Narrator</title>
+    <style type="text/css">
+      html {
+        font-size: 18px;
+        background-color: rgb(255, 238, 218);
+      }
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Narrator</title>
-  <style type="text/css">
-    html {
-      font-size: 18px;
-      background-color: rgb(255, 238, 218);
-    }
+      body {
+        /* margin-top: 5%; */
+        padding: 0;
+        margin: 0;
+      }
 
-    body {
-      /* margin-top: 5%; */
-      padding: 0;
-      margin: 0;
-    }
+      .main {
+        max-width: 50%;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: bisque;
+      }
 
-    .main {
-      max-width: 50%;
-      margin: 0 auto;
-      padding: 2rem;
-      background-color: bisque;
-    }
+      .readable {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+      }
+    </style>
+  </head>
 
-    .readable {
-      font-size: 1.25rem;
-      line-height: 1.75rem;
-    }
-  </style>
-</head>
+  <body>
+    <div class="main readable" id="narrator">
+      (classical music) - [Lecturer] In this challenge, we'll step outside
+      common layout practices to explore the cutting edge of CSS layouts by
+      using container queries. And I recommend you go check out the MDN article
+      on container queries before trying to solve those challenge. When working
+      with modules like cards, we often want to change their internal layout
+      based on the space available for each component. This can be achieved
+      using container queries. These are media queries that are tied to the
+      width of a container or the height of a container or some other property
+      instead of the viewport. You can see an example of it here. So when the
+      viewport is wide it means that the container is also wide. And then you
+      get this side by a layout. But when I reduce the width of the viewport, it
+      also reduces the width of the container and eventually it'll change its
+      layout. Now, this could be done using a media query for the content width
+      but I actually want it to happen inside the container so that different
+      cards displayed at different places will change their layouts depending on
+      their available space, rather than depending on the total width of the
+      viewport. So that's what we're trying to achieve here. Oh, and one caveat.
+      As of this recording container queries are only supported in the Chrome
+      browser. So use Chrome for testing and experimentation. In this challenge,
+      the layout should appear as a vertical stack. So image, heading, text,
+      button, when there is limited horizontal space and change to a display
+      where the image is on the left and the text and the button is on the
+      right, when there is sufficient horizontal space inside the container and
+      this should happen for each card individually. To test, change the
+      viewport width and see the card vary with the width. In the exercise files
+      for this challenge, we have again, the single card, HTML has not changed.
+      And also the CSS has not changed. This is the same CSS we worked with
+      earlier in a previous challenge. Now you take on this challenge. Pause the
+      video here, find your solution. Then come back, hit play and see how I
+      solve the same challenge. (classical music) The idea of container query is
+      you define a container as the baseline for the query and then query some
+      parameter of that container. For example, we can define the figure as a
+      container and then query the width of the figure and create custom layouts
+      inside the figure based on the current width. To get this to work, we need
+      to commit what I often refer to as a web standards crime that is adding in
+      a div that doesn't really have any purpose other than for layout purposes.
+      So here, because I'm adding a query to the figure, I need to have
+      something to apply the changes to. So I'm going to add an extra div inside
+      the figure. So I'll say div and give it the class card-inner. Then I'll
+      take the end div tag and place it right before the end figure tag down
+      here. So now we can query the figure and then apply any changes to
+      card-inner and what is inside card-inner. Okay, the next step is we need
+      to tell the browser which container is now being queried. And we do that
+      by adding the new container type property to that container. So in this
+      case, we're querying the card container. So I'll say container
+      container-type colon, and then we're looking for inline size. We're
+      looking for the horizontal size of the container. So I'll say inline-size.
+      You'll notice when I do this, that VS Code is like, "Hey, hey, hey, what
+      exactly is container type?" This is so bleeding edge that VS Code doesn't
+      yet know that this is a property in CSS, but trust me, this will actually
+      work in Chrome. And like I said, it only works in Chrome right now, but it
+      does work. Now that we've set card as a container-type: inline-size,
+      meaning we are querying the width of the current container, we can set up
+      a query. That query looks like this @container, and that means at the
+      first available container you see higher up in the stack, which is this
+      one right here. Then I say min-width and set it to a value. So let's say
+      60ch. And then we can do things to what's inside that container. So here,
+      I'll say card-inner, and set card-inner to display: flex. Then I'll grab
+      all the direct descendants of card-inner and set them to 50%. So the
+      direct descendants of the card-inner is the image and the figcaption. So
+      that will work fine. So I'll say card-inner and then any descendant of
+      that, we'll set max-width: 50%. And then finally I want the image to not
+      be squished but instead take up all the available space. So I'll say card
+      and then image, and I'll set this to object-fit: cover. All right, save
+      that, jump back into Chrome. And now you see, we have a different layout.
+      So the card now has two columns, one for the image and one for the text
+      and the image is stretching to fill that column. And if I changed a width
+      of this card now, eventually we'll hit that break point inside the card
+      width where we get the vertical stack instead. That's it, that's the
+      solution to this challenge.
+    </div>
 
-<body>
-  <div class="main readable" id="narrator">
-    - [Instructor] Cards are typically displayed in a multi-card layout of some sort. In this challenge, you'll build on
-    the
-    card from the previous challenge by displaying multiple cards within the same layout. The layout can show at most
-    three
-    cards next to one another. When there is insufficient width available, the cards must wrap down to the next
-    horizontal
-    line and the position and layout of the wrapped row is entirely up to you. To test, change the viewport width to
-    ensure
-    the cards display properly and wrap as intended across all viewport widths. Also, try adding additional cards to see
-    what happens. If we go over here and look at the preview, you can can see right now we have four cards that are
-    already
-    wrapping. If I reduce the width here, you can see the cards will automatically wrap down as necessary to always
-    display
-    the cards in the way that we want, without the cards ever getting too squished and without the cards ever taking up
-    too
-    much space. In the exercise files, you'll find I've just duplicated the card code that we had in the previous movie.
-    So
-    this is just four instances of the same card we already worked with. And the styles are exactly where I left them
-    off in
-    the previous movie. So everything right now matches what we had in the previous challenge. This is a responsive
-    card.
-    And as a result, if you go into the browser, you'll see it doesn't look the way we want. This isn't the layout we're
-    looking for. We need to do something to change this layout and make it behave properly. This is your starting point.
-    Now
-    you take on this challenge. Pause the video here, find your solution, then come back, hit play and see how I solve
-    the
-    same challenge. The key to solving this challenge is to look back at some of the earlier challenges we had in this
-    course. We're already laying out the main using flex. And that means that the cards are being displayed as equal
-    height
-    columns. However, they're not being displayed the way I want them. So I need to make some changes to the main first.
-    Let's see here. So we have display flex and justify content center, that gives me a central line flex box. But I
-    need to
-    do a bit more to it. So first of all, I need to make it wrap. So I'll say flex wrap and wrap and let's look at that.
-    Okay. So now all the boxes are just wrapping vertically. All right. That's not quite what I want, but okay. And then
-    also you notice there's a lot of space between them. So what if we sit a gap. Let's see. Oh, the space is actually
-    coming from down here on the card. So let's take that out first and then, hmm. Okay. Now they're jammed up against
-    each
-    other. So then we can use gap, cause gap is much easier to control. So we'll say gap 2rem. All right. So that gives
-    us
-    the cards in vertical stacks, which is not what we want. So we need to somehow change the display of each card so
-    that
-    they display next to one another. Here, it's important to remember, flex is a content out layout module, meaning the
-    contents decide their own size. That means I need to change the size of the content down here in the card itself.
-    Now,
-    right now we're using this clamp for width. We're saying the card can be no smaller than 20ch. It should ideally be
-    50%
-    of the width. And the max width should be the content width, which is 50ch. So this is what's resulting in each of
-    the
-    cards being stacked vertically. And if we had a very large monitor, we would see them stacked next to one another,
-    but
-    that's highly unlikely. So we need to change this piece of code here. And here you have two very different options
-    to
-    choose from. We can either modify this code here to display differently or we can use flex basis to make this
-    happen. So
-    let's start by modifying this. So instead of saying clamp 20ch 50% of our content width, I want to say, let's see,
-    if we
-    take the total width and then divide it into four spaces that should give us three columns, because it's four plus
-    the
-    padding and everything. So that should give us three columns. So I'll say 20ch is still the smallest. And then I'll
-    say
-    calc and we'll grab we'll one quarter of a hundred percent. So one divided by four times 100%. And then for the max
-    width, I actually want to set it to a hundred percent. So that's for the instances where we're displaying the card
-    as
-    its own instance. And that would be so that it takes up all the available space. So let's just try this and see what
-    happens. So I'll go back to the browser. Oh, look at that. Now we have three cards, one next to the other. And I
-    know
-    when you look at this, it may sound a little surprising, because I have it divided by four here. But like I said,
-    it's
-    because we have four plus the padding, plus the some other stuff. And that's why we have this extra width. Now, this
-    layout results in the cards all displaying next to one another. And the card that's being wrapped down below has the
-    same width as the other cards, because we are defining the maximum width of the card. If you want it to be so that
-    the
-    card spans the full width, the wrapped card spans the full width and the cards are more dynamic and take up the
-    available space, we can use flex basis to do that. We looked at that previously in the course and now we can just
-    look
-    at it again. So if we go down here and instead of saying width, I say flex and then grow one factor, shrink one
-    factor,
-    and then clamp, actually, I'm just going to copy that clamp entirely from up here. So we're using the same clamp
-    like
-    this. So here we're saying the flex basis, meaning the starting point for the calculation of the flex box is minimum
-    20ch. Ideally something like a quarter of the total width and the maximum is a hundred percent. Let's save that and
-    see
-    what happens. So now we get a slightly different layout. So we have the three boxes at the top and you notice
-    they're
-    bigger than they were before. And if we scroll down, we have this giant box at the bottom. It also highlights a bit
-    of a
-    problem with my layout. I don't have any padding around this box here. So on the main, I'll just add padding 2rem so
-    that we have space around. Okay? Then finally, we can go and inspect this. I'll dock this away so that you don't see
-    it.
-    And then we can check that this is responsive. So now you'll see that the boxes do resize, because we're using flex
-    basis. So it's taking up all the available space and it is wrapping nicely. So those are two very different options
-    that
-    give you two very different results, but both solve the challenge. So here you can choose whichever works best with
-    your
-    particular layout needs.
-  </div>
-
-  <script type="text/javascript">
-    window.addEventListener('load', function () {
-      const fullStopRegex = /\./g;
-      const narrator = document.getElementById('narrator');
-      narrator.innerHTML = narrator.innerHTML.replace(fullStopRegex, '.<br /><br />');
-    });
-
-  </script>
-</body>
-
+    <script type="text/javascript">
+      window.addEventListener("load", function () {
+        const fullStopRegex = /\./g;
+        const narrator = document.getElementById("narrator");
+        narrator.innerHTML = narrator.innerHTML.replace(
+          fullStopRegex,
+          ".<br /><br />"
+        );
+      });
+    </script>
+  </body>
 </html>
