@@ -27,7 +27,31 @@ img {
 }
 
 .main {
-  
+  /*
+    Make sure the main's ancestor, which, in this case, is the <body> to have 0 padding & margin.
+    Thus, 100% means 100% width of the viewport.
+    We should not use 100vw because there are some weird issues when scrolling happens.
+  */
+  width: 100%;
+
+  /* Takes up the full height of the viewport */
+  height: 100vh;
+
+  /* Enables scrolling inside the container, not the browser */
+  overflow-y: scroll;
+
+  /* The key property to achieve paged layout */
+  scroll-snap-type: Y mandatory;
+}
+
+/* To fully achieve "paged layout", we need to add necessary styling to `main` direct descendants */
+main > * {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  scroll-snap-align: center;
 }
 
 .card-inner {
